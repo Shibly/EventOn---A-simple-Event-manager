@@ -19,7 +19,7 @@ class EventController extends Controller
     /**
      * Lists all Event entities.
      * @Template()
-     * @Route("/")
+     * @Route("/", name="event")
      */
     public function indexAction()
     {
@@ -71,7 +71,7 @@ class EventController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        // $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }

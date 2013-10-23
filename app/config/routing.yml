@@ -1,8 +1,17 @@
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 event:
     resource: "@EventBundle/Resources/config/routing.yml"
     prefix:   /
 
 EventBundle_Event_Annotation:
     resource: "@EventBundle/Controller"
-    prefix: /event
+    prefix: /
+    type: annotation
+
+
+user_routes:
+    resource: "@UserBundle/Controller"
     type: annotation
