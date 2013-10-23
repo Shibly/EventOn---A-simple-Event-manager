@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: event_manager
+    database_user: root
+    database_password: rivergod
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: 0a50273cc9429ad8df260a1305a3d9cdc9017052
+    database_path: null
