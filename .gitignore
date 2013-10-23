@@ -1,3 +1,4 @@
 vendor/
 config/parameters.yml
 .idea/
+app/cache
