@@ -1,4 +1,6 @@
 vendor/
 config/parameters.yml
 .idea/
-app/cache
+app/cache/
+app/cache/dev
+app/cache/prod
