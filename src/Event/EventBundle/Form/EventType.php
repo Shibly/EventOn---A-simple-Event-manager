@@ -8,7 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class EventType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -16,13 +16,12 @@ class EventType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('imageName')
             ->add('time')
             ->add('location')
             ->add('details')
-        ;
+            ->add('file');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

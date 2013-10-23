@@ -2,5 +2,7 @@ vendor/
 config/parameters.yml
 .idea/
 app/cache/
-app/cache/dev
-app/cache/prod
+app/cache/dev/
+app/cache/prod/
+web/uploads/
+.DS_store
