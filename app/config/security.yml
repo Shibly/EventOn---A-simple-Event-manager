@@ -1,17 +1,18 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        # This tells Symfony that the password field on our User will be encoded using sha512.
+        Event\UserBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        our_database_user:
+
+            # A "provider" is like a pull of users and we can use the built-in entity type to pull from the user table.
+            entity: { class: UserBundle:User, property: username }
+
 
     firewalls:
         dev:
