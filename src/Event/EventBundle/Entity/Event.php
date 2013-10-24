@@ -185,7 +185,7 @@ class Event
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    public $imageName;
+    private $imageName;
 
     public function getAbsolutePath()
     {
