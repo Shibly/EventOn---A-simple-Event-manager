@@ -11,7 +11,7 @@ security:
         our_database_user:
 
             # A "provider" is like a pull of users and we can use the built-in entity type to pull from the user table.
-            entity: { class: UserBundle:User, property: username }
+            entity: { class: UserBundle:User }
 
 
     firewalls:

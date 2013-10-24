@@ -2233,7 +2233,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5268fb6b428e2</argument>
+            <argument>526908b69dda5</argument>
           </service>
         </argument>
       </argument>
@@ -2336,7 +2336,7 @@
     <service id="security.user.provider.concrete.our_database_user" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
       <argument type="service" id="doctrine"/>
       <argument>UserBundle:User</argument>
-      <argument>username</argument>
+      <argument>null</argument>
       <argument>null</argument>
     </service>
     <service id="security.firewall.map.context.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
@@ -2513,7 +2513,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5268fb6b428e2</argument>
+            <argument>526908b69dda5</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>

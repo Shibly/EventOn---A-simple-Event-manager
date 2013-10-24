@@ -11,7 +11,7 @@ use Serializable;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="Event\UserBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="Event\UserBundle\Repositories\UserRepository")
  */
 class User implements AdvancedUserInterface, Serializable
 {
@@ -48,6 +48,15 @@ class User implements AdvancedUserInterface, Serializable
      * @ORM\Column(name="username", type="string", length=255)
      */
     private $username;
+
+    /**
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @param mixed $email
+     */
 
     /**
      * @var string
@@ -96,6 +105,23 @@ class User implements AdvancedUserInterface, Serializable
     {
         return $this->username;
     }
+
+    /**
+     * @param $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
 
     /**
      * Set password

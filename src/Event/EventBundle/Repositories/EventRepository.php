@@ -1,6 +1,6 @@
 <?php
 
-namespace Event\EventBundle\Entity;
+namespace Event\EventBundle\Repositories;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -12,4 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventRepository extends EntityRepository
 {
+
 }
