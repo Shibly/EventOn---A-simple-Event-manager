@@ -20,6 +20,7 @@ class User implements AdvancedUserInterface, Serializable
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
+    private $plainPassword;
     /**
      * @var bool
      * @ORM\Column(type="boolean")
@@ -207,7 +208,7 @@ class User implements AdvancedUserInterface, Serializable
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->setPlainPassword(null);
     }
 
     /**
@@ -312,5 +313,17 @@ class User implements AdvancedUserInterface, Serializable
     {
         $data = unserialize($serialized);
         $this->id = $data['id'];
+    }
+
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
     }
 }

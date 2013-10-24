@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Event\UserBundle\Form\RegisterFormType;
 
 class RegisterController extends Controller
 {
@@ -23,19 +24,13 @@ class RegisterController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $form = $this->createFormBuilder()
-            ->add('username', 'text')
-            ->add('email', 'email')
-            ->add('password', 'repeated', array('type' => 'password'))
-            ->getForm();
+        $user = new User();
+        $form = $this->createForm(new RegisterFormType(), $user);
         if ($request->getMethod('POST')) {
             $form->submit($request);
             if ($form->isValid()) {
-                $data = $form->getData();
-                $user = new User();
-                $user->setUsername($data['username']);
-                $user->setEmail($data['email']);
-                $user->setPassword($this->encodePassword($user, $data['password']));
+                $user = $form->getData();
+                $user->setPassword($this->encodePassword($user, $user->getPlainPassword()));
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
