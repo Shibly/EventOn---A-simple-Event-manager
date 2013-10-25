@@ -15,6 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Event\UserBundle\Form\RegisterFormType;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegisterController extends Controller
 {
@@ -36,8 +38,11 @@ class RegisterController extends Controller
             $request->getSession()->getFlashBag()
                 ->add('success', 'Registration went super smooth !');
 
-            // We'll redirect the user next
-
+            /**
+             * Now we'll authenticate the user and alg then in the system and in the same time
+             * we'll redirect them to the home page
+             */
+            $this->authenticateUser($user);
             $url = $this->generateUrl('event');
             return $this->redirect($url);
         }
@@ -59,7 +64,10 @@ class RegisterController extends Controller
         return $encoder->encodePassword($plainPassword, $user->getSalt());
     }
 
-
+    /**
+     * @param User $user
+     * @return \Symfony\Component\Form\Form
+     */
     private function createRegisterForm(User $user)
     {
         $form = $this->createForm(new RegisterFormType(), $user,
@@ -69,5 +77,15 @@ class RegisterController extends Controller
             ));
         return $form;
 
+    }
+
+    // Create an authentication package, called a token and pass it off to Symfony’s security system. Now
+    // we are going to call this method after registration to automatically log the user in
+
+    private function authenticateUser(UserInterface $user)
+    {
+        $provider_key = 'secured_area'; // Firewall name
+        $token = new UsernamePasswordToken($user, null, $provider_key, $user->getRoles());
+        $this->container->get('security.context')->setToken($token);
     }
 }
