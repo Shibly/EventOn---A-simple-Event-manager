@@ -33,6 +33,8 @@ class RegisterController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+            $request->getSession()->getFlashBag()
+                ->add('success', 'Registration went super smooth !');
 
             // We'll redirect the user next
 
