@@ -6,10 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Serializable;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * User
- *
+ * @UniqueEntity(fields="username", message="The username is taken")
+ * @UniqueEntity(fields="email", message="The email is taken")
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Event\UserBundle\Repositories\UserRepository")
  */
@@ -20,6 +23,13 @@ class User implements AdvancedUserInterface, Serializable
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
+    /**
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *      pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/",
+     *      message="Please use at least one upper case letter, one lower case letter, and one number"
+     * )
+     */
     private $plainPassword;
     /**
      * @var bool
@@ -52,6 +62,8 @@ class User implements AdvancedUserInterface, Serializable
 
     /**
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank(message="Put a valid email")
+     * @Assert\Email
      */
     private $email;
 
