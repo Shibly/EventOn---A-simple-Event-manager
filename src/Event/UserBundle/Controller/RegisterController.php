@@ -25,22 +25,21 @@ class RegisterController extends Controller
     public function registerAction(Request $request)
     {
         $user = new User();
-        $form = $this->createForm(new RegisterFormType(), $user);
-        if ($request->getMethod('POST')) {
-            $form->submit($request);
-            if ($form->isValid()) {
-                $user = $form->getData();
-                $user->setPassword($this->encodePassword($user, $user->getPlainPassword()));
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($user);
-                $em->flush();
+        $form = $this->createRegisterForm($user);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $user = $form->getData();
+            $user->setPassword($this->encodePassword($user, $user->getPlainPassword()));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
 
-                // We'll redirect the user next
+            // We'll redirect the user next
 
-                $url = $this->generateUrl('event');
-                return $this->redirect($url);
-            }
+            $url = $this->generateUrl('event');
+            return $this->redirect($url);
         }
+
         return array('form' => $form->createView());
     }
 
@@ -56,5 +55,17 @@ class RegisterController extends Controller
             ->getEncoder($user);
 
         return $encoder->encodePassword($plainPassword, $user->getSalt());
+    }
+
+
+    private function createRegisterForm(User $user)
+    {
+        $form = $this->createForm(new RegisterFormType(), $user,
+            array(
+                'action' => $this->generateUrl('event'),
+                'method' => 'POST'
+            ));
+        return $form;
+
     }
 }
