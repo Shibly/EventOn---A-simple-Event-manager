@@ -10,13 +10,14 @@ namespace Event\UserBundle\Controller;
 
 
 use Event\UserBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Event\UserBundle\Form\RegisterFormType;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Event\EventBundle\Controller\Controller;
 
 class RegisterController extends Controller
 {
@@ -86,6 +87,6 @@ class RegisterController extends Controller
     {
         $provider_key = 'secured_area'; // Firewall name
         $token = new UsernamePasswordToken($user, null, $provider_key, $user->getRoles());
-        $this->container->get('security.context')->setToken($token);
+        $this->getSecurityContext()->setToken($token);
     }
 }

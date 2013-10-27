@@ -6,6 +6,7 @@ use Event\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Event
@@ -54,11 +55,19 @@ class Event
     private $details;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event\UserBundle\Entity\User", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Event\UserBundle\Entity\User", cascade={"remove"}, inversedBy="events")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
 
     protected $owner;
+
+    /**
+     * @var
+     * @ORM\Column(length=255, unique=true)
+     * @Gedmo\Slug(fields={"name"}, updatable=false)
+     */
+
+    protected $slug;
 
 
     /**
@@ -194,6 +203,16 @@ class Event
     public function setOwner(User $owner)
     {
         $this->owner = $owner;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     //********************************************************File Upload********************************

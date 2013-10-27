@@ -2,7 +2,8 @@
 
 namespace Event\EventBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Event\EventBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {

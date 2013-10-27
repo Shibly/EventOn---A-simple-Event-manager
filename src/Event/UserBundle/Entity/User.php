@@ -2,6 +2,7 @@
 
 namespace Event\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -20,8 +21,16 @@ class User implements AdvancedUserInterface, Serializable
 {
     public function __construct()
     {
+        $this->events = new ArrayCollection();
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
+
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Event\EventBundle\Entity\Event", mappedBy="owner")
+     */
+    protected $events;
 
     /**
      * @Assert\NotBlank
