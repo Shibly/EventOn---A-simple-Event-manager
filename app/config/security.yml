@@ -4,7 +4,7 @@ security:
         Event\UserBundle\Entity\User: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_EVENT_MANAGER]
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
@@ -34,9 +34,11 @@ security:
             anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
+            remember_me:
+                key: The name of our cat is Edgar!
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { path: ^/event/new, roles: ROLE_USER }
-        - { path: ^/event/create, roles: ROLE_USER }
+       #  - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/event/new, roles: ROLE_EVENT_MANAGER }
+        - { path: ^/event/create, roles: ROLE_EVENT_MANAGER }
+       # - { path: ^/, roles: ROLE_USER }

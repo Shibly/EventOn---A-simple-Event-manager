@@ -272,6 +272,7 @@
     <parameter key="security.role_hierarchy.roles" type="collection">
       <parameter key="ROLE_ADMIN" type="collection">
         <parameter>ROLE_USER</parameter>
+        <parameter>ROLE_EVENT_MANAGER</parameter>
       </parameter>
       <parameter key="ROLE_SUPER_ADMIN" type="collection">
         <parameter>ROLE_USER</parameter>
@@ -2232,8 +2233,17 @@
           </service>
         </argument>
         <argument type="service">
+          <service class="Symfony\Component\Security\Core\Authentication\Provider\RememberMeAuthenticationProvider" public="false">
+            <argument type="service">
+              <service class="Symfony\Component\Security\Core\User\UserChecker" public="false"/>
+            </argument>
+            <argument>The name of our cat is Edgar!</argument>
+            <argument>secured_area</argument>
+          </service>
+        </argument>
+        <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>526a46e773b8a</argument>
+            <argument>526ceebe6decd</argument>
           </service>
         </argument>
       </argument>
@@ -2256,6 +2266,7 @@
                 <argument type="collection">
                   <argument key="ROLE_ADMIN" type="collection">
                     <argument>ROLE_USER</argument>
+                    <argument>ROLE_EVENT_MANAGER</argument>
                   </argument>
                   <argument key="ROLE_SUPER_ADMIN" type="collection">
                     <argument>ROLE_USER</argument>
@@ -2357,22 +2368,11 @@
                 <call method="add">
                   <argument type="service">
                     <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
-                      <argument>^/demo/secured/hello/admin/</argument>
-                    </service>
-                  </argument>
-                  <argument type="collection">
-                    <argument>ROLE_ADMIN</argument>
-                  </argument>
-                  <argument>null</argument>
-                </call>
-                <call method="add">
-                  <argument type="service">
-                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
                       <argument>^/event/new</argument>
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_USER</argument>
+                    <argument>ROLE_EVENT_MANAGER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2383,7 +2383,7 @@
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_USER</argument>
+                    <argument>ROLE_EVENT_MANAGER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2437,6 +2437,28 @@
             <call method="addHandler">
               <argument type="service">
                 <service class="Symfony\Component\Security\Http\Logout\SessionLogoutHandler" public="false"/>
+              </argument>
+            </call>
+            <call method="addHandler">
+              <argument type="service">
+                <service class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+                  <argument type="collection">
+                    <argument type="service" id="security.user.provider.concrete.our_database_user"/>
+                  </argument>
+                  <argument>The name of our cat is Edgar!</argument>
+                  <argument>secured_area</argument>
+                  <argument type="collection">
+                    <argument key="name">REMEMBERME</argument>
+                    <argument key="lifetime">31536000</argument>
+                    <argument key="path">/</argument>
+                    <argument key="domain">null</argument>
+                    <argument key="secure">false</argument>
+                    <argument key="httponly">true</argument>
+                    <argument key="always_remember_me">false</argument>
+                    <argument key="remember_me_parameter">_remember_me</argument>
+                  </argument>
+                  <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+                </service>
               </argument>
             </call>
           </service>
@@ -2508,12 +2530,62 @@
             </argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="event_dispatcher" on-invalid="null"/>
+            <call method="setRememberMeServices">
+              <argument type="service">
+                <service class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+                  <argument type="collection">
+                    <argument type="service" id="security.user.provider.concrete.our_database_user"/>
+                  </argument>
+                  <argument>The name of our cat is Edgar!</argument>
+                  <argument>secured_area</argument>
+                  <argument type="collection">
+                    <argument key="name">REMEMBERME</argument>
+                    <argument key="lifetime">31536000</argument>
+                    <argument key="path">/</argument>
+                    <argument key="domain">null</argument>
+                    <argument key="secure">false</argument>
+                    <argument key="httponly">true</argument>
+                    <argument key="always_remember_me">false</argument>
+                    <argument key="remember_me_parameter">_remember_me</argument>
+                  </argument>
+                  <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+                </service>
+              </argument>
+            </call>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="Symfony\Component\Security\Http\Firewall\RememberMeListener" public="false">
+            <argument type="service" id="security.context"/>
+            <argument type="service">
+              <service class="Symfony\Component\Security\Http\RememberMe\TokenBasedRememberMeServices" public="false">
+                <argument type="collection">
+                  <argument type="service" id="security.user.provider.concrete.our_database_user"/>
+                </argument>
+                <argument>The name of our cat is Edgar!</argument>
+                <argument>secured_area</argument>
+                <argument type="collection">
+                  <argument key="name">REMEMBERME</argument>
+                  <argument key="lifetime">31536000</argument>
+                  <argument key="path">/</argument>
+                  <argument key="domain">null</argument>
+                  <argument key="secure">false</argument>
+                  <argument key="httponly">true</argument>
+                  <argument key="always_remember_me">false</argument>
+                  <argument key="remember_me_parameter">_remember_me</argument>
+                </argument>
+                <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+              </service>
+            </argument>
+            <argument type="service" id="security.authentication.manager"/>
+            <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+            <argument type="service" id="event_dispatcher" on-invalid="null"/>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>526a46e773b8a</argument>
+            <argument>526ceebe6decd</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2527,22 +2599,11 @@
                 <call method="add">
                   <argument type="service">
                     <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
-                      <argument>^/demo/secured/hello/admin/</argument>
-                    </service>
-                  </argument>
-                  <argument type="collection">
-                    <argument>ROLE_ADMIN</argument>
-                  </argument>
-                  <argument>null</argument>
-                </call>
-                <call method="add">
-                  <argument type="service">
-                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
                       <argument>^/event/new</argument>
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_USER</argument>
+                    <argument>ROLE_EVENT_MANAGER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2553,7 +2614,7 @@
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_USER</argument>
+                    <argument>ROLE_EVENT_MANAGER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
