@@ -3,12 +3,13 @@
 namespace Event\EventBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Event\EventBundle\Entity\Event;
 use Event\EventBundle\Form\EventType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Event\EventBundle\Controller\Controller;
 
 /**
  * Event controller.
@@ -46,7 +47,7 @@ class EventController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $user = $this->get('security.context')->getToken()->getuser();
+            $user = $this->getSecurityContext()->getToken()->getuser();
             $entity->setOwner($user);
             // handling the file upload
             $entity->upload();
@@ -235,7 +236,7 @@ class EventController extends Controller
 
     private function checkOwnerSecurity(Event $event)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getSecurityContext()->getToken()->getUser();
         if ($user != $event->getOwner()) {
             throw new AccessDeniedException('You are not the owner to edit this event !!!');
         }
