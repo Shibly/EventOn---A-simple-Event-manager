@@ -28,8 +28,7 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getManager();
         // Find all is a default method comes from the base repository class along side with a few other
         // useful methods.
-        $entities = $em->getRepository('EventBundle:Event')->findAll();
-
+        $entities = $em->getRepository('EventBundle:Event')->getUpcomingEvents();
         return array(
             'entities' => $entities
         );

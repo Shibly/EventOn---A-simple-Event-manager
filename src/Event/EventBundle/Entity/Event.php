@@ -69,6 +69,23 @@ class Event
 
     protected $slug;
 
+    /**
+     * @var
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+
+    private $created;
+
+
+    /**
+     * @var
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+
+    private $updated;
+
 
     /**
      * Get id
@@ -213,6 +230,38 @@ class Event
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     //********************************************************File Upload********************************
