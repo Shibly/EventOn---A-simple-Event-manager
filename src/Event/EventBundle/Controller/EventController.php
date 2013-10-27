@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Event\EventBundle\Entity\Event;
 use Event\EventBundle\Form\EventType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Event controller.
@@ -45,6 +46,9 @@ class EventController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user = $this->get('security.context')->getToken()->getuser();
+            $entity->setOwner($user);
+            // handling the file upload
             $entity->upload();
             $em->persist($entity);
             $em->flush();
@@ -126,6 +130,7 @@ class EventController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Event entity.');
         }
+        $this->checkOwnerSecurity($entity);
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -226,5 +231,14 @@ class EventController extends Controller
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
+    }
+
+    private function checkOwnerSecurity(Event $event)
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($user != $event->getOwner()) {
+            throw new AccessDeniedException('You are not the owner to edit this event !!!');
+        }
+
     }
 }

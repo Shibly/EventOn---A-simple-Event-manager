@@ -272,7 +272,6 @@
     <parameter key="security.role_hierarchy.roles" type="collection">
       <parameter key="ROLE_ADMIN" type="collection">
         <parameter>ROLE_USER</parameter>
-        <parameter>ROLE_EVENT_MANAGER</parameter>
       </parameter>
       <parameter key="ROLE_SUPER_ADMIN" type="collection">
         <parameter>ROLE_USER</parameter>
@@ -399,8 +398,8 @@
     <parameter key="assetic.write_to">/Library/WebServer/Documents/eventlist/app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
     <parameter key="assetic.java.bin">/usr/bin/java</parameter>
-    <parameter key="assetic.node.bin">/usr/bin/node</parameter>
-    <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
+    <parameter key="assetic.node.bin">/usr/local/bin/node</parameter>
+    <parameter key="assetic.ruby.bin">/usr/local/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
@@ -2243,7 +2242,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>526ceebe6decd</argument>
+            <argument>526cf808cd52f</argument>
           </service>
         </argument>
       </argument>
@@ -2266,7 +2265,6 @@
                 <argument type="collection">
                   <argument key="ROLE_ADMIN" type="collection">
                     <argument>ROLE_USER</argument>
-                    <argument>ROLE_EVENT_MANAGER</argument>
                   </argument>
                   <argument key="ROLE_SUPER_ADMIN" type="collection">
                     <argument>ROLE_USER</argument>
@@ -2372,7 +2370,7 @@
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_EVENT_MANAGER</argument>
+                    <argument>ROLE_USER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2383,7 +2381,18 @@
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_EVENT_MANAGER</argument>
+                    <argument>ROLE_USER</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/event/(\d+)/(edit|update|delete)</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_USER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2585,7 +2594,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>526ceebe6decd</argument>
+            <argument>526cf808cd52f</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -2603,7 +2612,7 @@
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_EVENT_MANAGER</argument>
+                    <argument>ROLE_USER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>
@@ -2614,7 +2623,18 @@
                     </service>
                   </argument>
                   <argument type="collection">
-                    <argument>ROLE_EVENT_MANAGER</argument>
+                    <argument>ROLE_USER</argument>
+                  </argument>
+                  <argument>null</argument>
+                </call>
+                <call method="add">
+                  <argument type="service">
+                    <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                      <argument>^/event/(\d+)/(edit|update|delete)</argument>
+                    </service>
+                  </argument>
+                  <argument type="collection">
+                    <argument>ROLE_USER</argument>
                   </argument>
                   <argument>null</argument>
                 </call>

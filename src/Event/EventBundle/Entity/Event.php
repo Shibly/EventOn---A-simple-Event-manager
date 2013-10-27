@@ -2,6 +2,7 @@
 
 namespace Event\EventBundle\Entity;
 
+use Event\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
@@ -51,6 +52,13 @@ class Event
      * @ORM\Column(name="details", type="text", nullable=true)
      */
     private $details;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Event\UserBundle\Entity\User", cascade={"remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+
+    protected $owner;
 
 
     /**
@@ -178,6 +186,15 @@ class Event
         return $this->details;
     }
 
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(User $owner)
+    {
+        $this->owner = $owner;
+    }
 
     //********************************************************File Upload********************************
 
