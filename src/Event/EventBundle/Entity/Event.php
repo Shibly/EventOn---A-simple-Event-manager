@@ -2,6 +2,7 @@
 
 namespace Event\EventBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Event\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -16,6 +17,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Event
 {
+
+    public function __construct()
+    {
+        $this->attendees = new ArrayCollection();
+    }
+
     /**
      * @var integer
      *
@@ -85,6 +92,16 @@ class Event
      */
 
     private $updated;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Event\UserBundle\Entity\User")
+     * @ORM\JoinTable(
+     *      joinColumns={@ORM\JoinColumn(onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE")}
+     *      )
+     */
+
+    protected $attendees;
 
 
     /**
@@ -263,6 +280,31 @@ class Event
     {
         return $this->updated;
     }
+
+    public function hasAttendee(User $user)
+    {
+        return $this->getAttendees()->contains($user);
+
+    }
+
+    /**
+     * @param User $attendees
+     */
+    public function removeAttendee(User $attendees)
+    {
+        $this->attendees->removeElement($attendees);
+    }
+
+    /**
+     * Get attendees
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAttendees()
+    {
+        return $this->attendees;
+    }
+
 
     //********************************************************File Upload********************************
 

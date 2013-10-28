@@ -25,6 +25,10 @@ class User implements AdvancedUserInterface, Serializable
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
     }
 
+    public function __toString()
+    {
+        return (string)$this->getUsername();
+    }
 
     /**
      * @var
