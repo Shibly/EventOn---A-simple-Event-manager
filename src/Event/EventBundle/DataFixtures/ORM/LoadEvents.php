@@ -26,19 +26,19 @@ class LoadEvents extends AbstractFixture implements ContainerAwareInterface, Ord
     {
         $user = $this->getReference('user-user');
         $event1 = new Event();
-        $event1->setName("Toma's birthday event")
+        $event1->setName("My's birthday event")
             ->setLocation('Dhaka')
             ->setTime(new \DateTime('tomorrow noon'))
-            ->setDetails('Toma loves surprise !');
+            ->setDetails('I love surprises !');
         $event1->setOwner($user);
         $manager->persist($event1);
 
 
         $event2 = new Event();
-        $event2->setName("Rebellion Fundraiser Bake Sale!")
-            ->setLocation('Endor')
+        $event2->setName("AngularJS meetup !")
+            ->setLocation('Dhaka')
             ->setTime(new \DateTime('Thursday noon'))
-            ->setDetails('Ewok pies! Support the rebellion!');
+            ->setDetails("The super heroic javaScript framework at it's glory !");
         $event2->setOwner($user);
         $manager->persist($event2);
 
