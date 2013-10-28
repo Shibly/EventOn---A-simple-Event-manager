@@ -235,9 +235,13 @@ class EventController extends Controller
         }
         $em->persist($event);
         $em->flush();
+
+        /*
+         * Not necessary right now
         if ($this->getRequest()->getRequestFormat() == 'json') {
             return $this->createAttendingJson(true);
         }
+        */
 
         return $this->redirect($this->generateUrl('event_show', array(
             'slug' => $event->getSlug()
@@ -261,9 +265,13 @@ class EventController extends Controller
         }
         $em->persist($event);
         $em->flush();
+
+        /*
+         * not necessary right now
         if ($this->getRequest()->getRequestFormat() == 'json') {
             $this->createAttendingJson(false);
         }
+        */
         return $this->redirect($this->generateUrl('event_show', array(
             'slug' => $event->getSlug()
         )));
