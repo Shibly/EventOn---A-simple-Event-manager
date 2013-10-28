@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Event\EventBundle\Entity\Event;
 use Event\EventBundle\Form\EventType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Event\EventBundle\Controller\Controller;
 
@@ -234,9 +235,14 @@ class EventController extends Controller
         }
         $em->persist($event);
         $em->flush();
+        if ($this->getRequest()->getRequestFormat() == 'json') {
+            return $this->createAttendingJson(true);
+        }
+
         return $this->redirect($this->generateUrl('event_show', array(
             'slug' => $event->getSlug()
         )));
+
     }
 
     public function unattendAction($id)
@@ -255,6 +261,9 @@ class EventController extends Controller
         }
         $em->persist($event);
         $em->flush();
+        if ($this->getRequest()->getRequestFormat() == 'json') {
+            $this->createAttendingJson(false);
+        }
         return $this->redirect($this->generateUrl('event_show', array(
             'slug' => $event->getSlug()
         )));
@@ -284,5 +293,14 @@ class EventController extends Controller
             throw new AccessDeniedException('You are not the owner to edit this event !!!');
         }
 
+    }
+
+    private function createAttendingJson($attending)
+    {
+        $data = array(
+            'attending' => $attending
+        );
+        $response = new Response(json_encode($data));
+        return $response;
     }
 }

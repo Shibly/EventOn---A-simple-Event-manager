@@ -31,10 +31,14 @@ event_delete:
 
 
 event_attend:
-    pattern: /{id}/attend
-    defaults: { _controller: "EventBundle:Event:attend" }
+    pattern: /{id}/attend.{_format}
+    defaults: { _controller: "EventBundle:Event:attend", _format: html }
+    requirements:
+        _format:  html|json
 
 
 event_unattend:
-    pattern: /{id}/unattend
-    defaults: { _controller: "EventBundle:Event:unattend" }
+    pattern: /{id}/unattend.{_format}
+    defaults: { _controller: "EventBundle:Event:unattend", _format: html }
+    requirements:
+        _format: html:json
