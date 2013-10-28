@@ -2,25 +2,28 @@
  {% block javascripts %}
      {{ parent() }}
      <script type="text/javascript">
-         jQuery(document).ready(function () {
-             jQuery('.attend-toggle').click(function () {
+         /*
+          jQuery(document).ready(function () {
+          jQuery('.attend-toggle').click(function () {
 
-                 $(this).siblings().show();
-                 $(this).hide();
+          $(this).siblings().show();
+          $(this).hide();
 
-                 var url = $(this).attr('href') + '.json';
+          var url = $(this).attr('href') + '.json';
 
-                 $.post(url, null, function (data) {
-                     if (data.attending) {
-                         $.growlUI('Awesome!', 'See you there!');
-                     } else {
-                         $.growlUI('Ah darn', 'We\'ll miss you!');
-                     }
-                 });
+          $.post(url, null, function (data) {
+          if (data.attending) {
+          $.growlUI('Awesome!', 'See you there!');
+          } else {
+          $.growlUI('Ah darn', 'We\'ll miss you!');
+          }
+          });
 
-                 return false;
-             });
-         });
+          return false;
+          });
+          });
+
+          */
      </script>
  {% endblock %}
 {% block body %}
@@ -76,6 +79,7 @@
                     </dd>
                     <dd>
                         <ul class="users">
+                            <h4>Attendees are :</h4>
                             {% for attendee in entity.attendees %}
                                 <li>{{ attendee }}</li>
                             {% else %}
