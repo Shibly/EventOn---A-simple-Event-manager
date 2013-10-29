@@ -22,7 +22,8 @@ class EventExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('ago', array($this, 'ago'))
+            new \Twig_SimpleFilter('ago', array($this, 'ago')),
+            new \Twig_SimpleFilter('hello', array($this, 'hello'))
         );
     }
 
@@ -30,5 +31,10 @@ class EventExtension extends \Twig_Extension
     public function ago(\DateTime $dt)
     {
         return DateUtil::ago($dt);
+    }
+
+    public function hello()
+    {
+        return DateUtil::sayHello();
     }
 }

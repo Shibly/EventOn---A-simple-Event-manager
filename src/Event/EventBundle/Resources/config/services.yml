@@ -11,3 +11,4 @@ services:
         arguments:  []
         tags:
             - { name: twig.extension }
+        public: false

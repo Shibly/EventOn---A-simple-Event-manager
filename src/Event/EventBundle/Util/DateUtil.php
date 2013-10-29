@@ -44,5 +44,10 @@ class DateUtil
         return sprintf('%s %s %s ', $difference, $periods[$j], $tense);
     }
 
+    static public function sayHello()
+    {
+        return "Hello Shibly";
+    }
+
 
 } 
