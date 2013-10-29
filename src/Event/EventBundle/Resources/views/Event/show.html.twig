@@ -65,11 +65,13 @@
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             {% if entity.hasAttendee(app.user) %}
                                 <a href="{{ path('event_unattend', {'id': entity.id}) }}"
-                                   class="attend-toggle{{ entity.hasAttendee(app.user) ? '':'hidden' }}">Oh no! I can't
+                                   class="attend-toggle{{ entity.hasAttendee(app.user) ? '':'hidden' }} myButton">Oh no!
+                                    I can't
                                     go anymore!</a>
                             {% else %}
                                 <a href="{{ path('event_attend', {'id': entity.id}) }}"
-                                   class="attend-toggle{{ entity.hasAttendee(app.user) ? 'hidden' : '' }}">I totally
+                                   class="attend-toggle{{ entity.hasAttendee(app.user) ? 'hidden' : '' }} myButton">I
+                                    totally
                                     want to go!</a>
                             {% endif %}
                         {% endif %}

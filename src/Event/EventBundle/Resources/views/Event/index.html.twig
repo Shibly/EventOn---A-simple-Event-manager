@@ -2,12 +2,12 @@
 {% block body %}
     <section class="events">
         <header id="menu">
-            <a class="button" href="{{ path('user_register') }}">Register</a>
-            <a class="button" href="{{ path('event_new') }}">Create new event</a>
+            <a class="myButton" href="{{ path('user_register') }}">Register</a>
+            <a class="myButton" href="{{ path('event_new') }}">Create new event</a>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <a class="button" href="{{ path('logout') }}">Logout <b>{{ app.user.username }}</b></a>
+                <a class="myButton" href="{{ path('logout') }}">Logout <b>{{ app.user.username }}</b></a>
             {% else %}
-                <a class="button" href="{{ path('login') }}">Login</a>
+                <a class="myButton" href="{{ path('login') }}">Login</a>
             {% endif %}
         </header>
         {{ include('EventBundle:Event:_events.html.twig') }}
