@@ -35,7 +35,7 @@
 
 .events article section {
     margin-top: 22px;
-    width: 315px;
+    width: 450px;
     min-height: 94px;
     padding: 10px;
     float: right;
@@ -121,6 +121,7 @@
     margin-bottom: 0px;
     font-family: Tahoma;
     font-size: 12px;
+    margin-left: 30px;
 }
 
 .events article section dl dt {
