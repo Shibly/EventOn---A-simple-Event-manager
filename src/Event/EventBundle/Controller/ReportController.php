@@ -12,7 +12,7 @@ namespace Event\EventBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Event\EventBundle\Reporting\EventReportManager;
 
-class ReportController extends Controller
+class ReportController
 {
     public function updatedEventsAction()
     {
