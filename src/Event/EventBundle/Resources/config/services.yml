@@ -6,3 +6,8 @@ services:
             - "@doctrine.orm.entity_manager"
         calls:
             - [ setLogger, ["@logger"] ]
+    event.twig.event_extension:
+        class:  Event\EventBundle\Twig\EventExtension
+        arguments:  []
+        tags:
+            - { name: twig.extension }
