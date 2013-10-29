@@ -62,8 +62,8 @@ class Event
     private $details;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event\UserBundle\Entity\User", inversedBy="events")
-     *
+     * @ORM\ManyToOne(targetEntity="Event\UserBundle\Entity\User", cascade={"remove"}, inversedBy="events")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
 
     protected $owner;
@@ -96,8 +96,9 @@ class Event
     /**
      * @ORM\ManyToMany(targetEntity="Event\UserBundle\Entity\User")
      * @ORM\JoinTable(
-     *      joinColumns={@ORM\JoinColumn(onDelete="CASCADE")}
-     *  )
+     *      joinColumns={@ORM\JoinColumn(onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(onDelete="CASCADE")}
+     *      )
      */
 
     protected $attendees;
