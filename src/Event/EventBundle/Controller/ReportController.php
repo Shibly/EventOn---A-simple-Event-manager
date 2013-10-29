@@ -8,7 +8,7 @@
 
 namespace Event\EventBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+// use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Event\EventBundle\Reporting\EventReportManager;
 
