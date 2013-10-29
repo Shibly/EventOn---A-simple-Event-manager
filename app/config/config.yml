@@ -25,7 +25,6 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
-    exception_controller: "event.controller.exception_Controller:showAction"
 
 # Assetic Configuration
 assetic:
@@ -72,9 +71,3 @@ stof_doctrine_extensions:
         default:
             sluggable:    true
             timestampable: true
-
-
-services:
-    event.controller.exception_controller:
-        parent: twig.controller.exception
-        class:  Event\EventBundle\Controller\ExceptionController
