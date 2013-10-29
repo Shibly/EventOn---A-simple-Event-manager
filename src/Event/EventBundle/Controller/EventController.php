@@ -187,11 +187,11 @@ class EventController extends Controller
             return $this->redirect($this->generateUrl('event_edit', array('id' => $id)));
         }
 
-        return $this->render('EventBundle:Event:edit.html.twig', array(
+        return $this->render('EventBundle:Event:edit.html.twig', [
             'entity' => $entity,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -243,9 +243,9 @@ class EventController extends Controller
         }
         */
 
-        return $this->redirect($this->generateUrl('event_show', array(
+        return $this->redirect($this->generateUrl('event_show', [
             'slug' => $event->getSlug()
-        )));
+        ]));
 
     }
 
@@ -272,9 +272,22 @@ class EventController extends Controller
             $this->createAttendingJson(false);
         }
         */
-        return $this->redirect($this->generateUrl('event_show', array(
+        return $this->redirect($this->generateUrl('event_show', [
             'slug' => $event->getSlug()
-        )));
+        ]));
+    }
+
+    /**
+     * @return array
+     * @Template("EventBundle:Event:_events.html.twig")
+     */
+    public function _upcomingEventsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('EventBundle:Event')->getUpcomingEvents();
+        return [
+            'entities' => $entities
+        ];
     }
 
     /**
