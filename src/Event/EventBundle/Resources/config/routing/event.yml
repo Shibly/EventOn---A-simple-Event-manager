@@ -42,3 +42,9 @@ event_unattend:
     defaults: { _controller: "EventBundle:Event:unattend", _format: html }
     requirements:
         _format: html:json
+
+
+
+event_report_update_events:
+    pattern: /events/report/recentlyUpdated.csv
+    defaults: { _controller: "EventBundle:Report:updatedEvents", _format: csv }

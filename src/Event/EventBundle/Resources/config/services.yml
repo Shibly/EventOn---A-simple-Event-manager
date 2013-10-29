@@ -1,7 +1,8 @@
-parameters:
-#    event.example.class: Event\EventBundle\Example
-
 services:
-#    event.example:
-#        class: %event.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    Event.reporting.event_report_manager:
+        class: Event\EventBundle\Reporting\EventReportManager
+        arguments:
+            # pass the string "foo" as the first constructor argument
+            - "@doctrine.orm.entity_manager"
+        calls:
+            - [ setLogger, ["@logger"] ]
