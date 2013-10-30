@@ -28,7 +28,7 @@ class EventReportManager
 
     public function getRecentlyUpdatedReport()
     {
-        $events = $this->$em
+        $events = $this->em
             ->getRepository('EventBundle:Event')
             ->getRecentlyUpdatedEvents();
 
