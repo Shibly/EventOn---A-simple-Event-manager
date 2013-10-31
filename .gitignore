@@ -1,8 +1,8 @@
 vendor/
 config/parameters.yml
 .idea/
-app/cache/
-app/cache/dev/
-app/cache/prod/
 web/uploads/
 .DS_store
+/app/bootstrap*
+/app/cache/*
+/app/logs/*
