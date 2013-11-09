@@ -1,3 +1,6 @@
-user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: UserBundle:Default:index }
+_default_routes:
+    resource: routing/default.yml
+
+ADminBundle_admin:
+    resource: "@UserBundle/Resources/config/routing/admin.yml"
+    prefix: /admin

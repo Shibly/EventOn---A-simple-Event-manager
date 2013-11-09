@@ -1,3 +1,0 @@
-admin_show:
-    pattern: /show
-    defaults: { _controller: "AdminBundle:Admin:index" }

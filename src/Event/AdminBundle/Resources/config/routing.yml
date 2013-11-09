@@ -1,6 +1,0 @@
-_default_routes:
-    resource: routing/default.yml
-
-ADminBundle_admin:
-    resource: "@AdminBundle/Resources/config/routing/admin.yml"
-    prefix: /admin
