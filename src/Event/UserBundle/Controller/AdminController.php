@@ -21,7 +21,9 @@ class AdminController extends BaseController
      */
     public function indexAction()
     {
-        return array('greetings' => 'Hello World !');
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('UserBundle:User')->findAll();
+        return array('users' => $users);
     }
 
 } 

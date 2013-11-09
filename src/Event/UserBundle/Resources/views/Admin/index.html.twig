@@ -1,6 +1,8 @@
 {% extends 'UserBundle::layout.html.twig' %}
 {% block body %}
     <section class="events">
-        {{ greetings }}
+        {% for user in users %}
+            {{ user.username }}
+        {% endfor %}
     </section>
 {% endblock %}
