@@ -349,6 +349,6 @@ class User implements AdvancedUserInterface, Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
-        return $this;
+        $this->setPassword(null);
     }
 }

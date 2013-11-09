@@ -14,6 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="events")
  * @ORM\Entity(repositoryClass="Event\EventBundle\Repositories\EventRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Event
 {
@@ -78,7 +79,6 @@ class Event
 
     /**
      * @var
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
 
@@ -305,6 +305,16 @@ class Event
         return $this->attendees;
     }
 
+    /**
+     * @ORM\PrePersist
+     */
+
+    public function prePersist()
+    {
+        if (!$this->getCreated()) {
+            $this->setCreated(new \DateTime());
+        }
+    }
 
     //********************************************************File Upload********************************
 

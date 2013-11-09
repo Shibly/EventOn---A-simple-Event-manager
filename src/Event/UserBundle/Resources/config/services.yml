@@ -1,7 +1,8 @@
-parameters:
-#    user.example.class: Event\UserBundle\Example
-
 services:
-#    user.example:
-#        class: %user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    event_user.listener.user_listener:
+         class: Event\UserBundle\Listener\UserListener
+         arguments:
+             - "@security.encoder_factory"
+         tags:
+             - { name: doctrine.event_listener, event: prePersist }
+             - { name: doctrine.event_listener, event: preUpdate }
