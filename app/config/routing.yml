@@ -16,6 +16,11 @@ EventBundle_Event_Annotation:
     type: annotation
 
 
+AdminBundle_Admin_Annotation:
+    resource: "@AdminBundle/Controller"
+    prefix: /
+    type: annotation
+
 user_routes:
     resource: "@UserBundle/Controller"
     type: annotation

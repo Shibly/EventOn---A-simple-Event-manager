@@ -9,8 +9,19 @@
 namespace Event\AdminBundle\Controller;
 
 use Event\EventBundle\Controller\Controller as BaseController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class AdminController extends BaseController
 {
+    /**
+     * Let's list all users
+     * @Template()
+     * @Route("/admin", name="admin")
+     */
+    public function indexAction()
+    {
+        return array('greetings' => 'Hello World !');
+    }
 
 } 

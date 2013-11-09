@@ -42,4 +42,5 @@ security:
         - { path: ^/event/new, roles: ROLE_USER }
         - { path: ^/event/create, roles: ROLE_USER }
         - { path: ^/event/(\d+)/(edit|update|delete), roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
        # - { path: ^/, roles: ROLE_USER }
