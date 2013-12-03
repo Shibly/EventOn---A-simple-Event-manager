@@ -12,6 +12,8 @@ use Event\EventBundle\Controller\Controller as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+//use Event\EventBundle\Repositories\EventRepository;
+
 class AdminController extends BaseController
 {
     /**
@@ -23,7 +25,36 @@ class AdminController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('UserBundle:User')->findAll();
-        return array('users' => $users);
+        $events = $em->getRepository('EventBundle:Event')->getUpcomingEvents();
+        return array('users' => $users, 'events' => $events);
     }
 
-} 
+
+    /**
+     * @param $id
+     */
+    public function editUser($id)
+    {
+    }
+
+    /**
+     * @param $id
+     */
+    public function editEvent($id)
+    {
+    }
+
+    /**
+     * @param $id
+     */
+    public function banUser($id)
+    {
+    }
+
+    /**
+     * @param $id
+     */
+    public function unpublishedEvent($id)
+    {
+    }
+}
