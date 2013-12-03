@@ -12,8 +12,6 @@ use Event\EventBundle\Controller\Controller as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-//use Event\EventBundle\Repositories\EventRepository;
-
 class AdminController extends BaseController
 {
     /**
