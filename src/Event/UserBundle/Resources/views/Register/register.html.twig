@@ -10,7 +10,7 @@
                 <section class="">
                     <h1>Register</h1>
 
-                    <form action="{{ path('user_register') }}" method="post">
+                    <form class="form-horizontal" action="{{ path('user_register') }}" method="post">
                         {{ form_errors(form) }}
                         {{ form_row(form.username) }}
                         {{ form_row(form.email) }}
