@@ -21,8 +21,11 @@
         {% endfor %}
     </div>
 {% endif %}
-{% block body %}
-{% endblock %}
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('bundles/event/js/jquery-2.0.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/event/js/jquery.blockUI.js') }}"></script>

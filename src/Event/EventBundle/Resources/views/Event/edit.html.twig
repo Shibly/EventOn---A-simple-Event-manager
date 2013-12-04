@@ -1,15 +1,17 @@
 {% extends 'EventBundle::layout.html.twig' %}
 {% block body -%}
-    <h1>Event edit</h1>
+    <div class="row"><h2>Edit {{ entity.name }}</h2>
 
-    {{ form(edit_form) }}
+        {{ form(edit_form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('event') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('event') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>
+
 {% endblock %}
