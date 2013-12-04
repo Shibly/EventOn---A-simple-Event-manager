@@ -11,7 +11,7 @@ body {
 }
 
 #menu a.link {
-    color: #fff;
+
     font-size: 18px;
     font-family: Arial;
     padding: 0px 4px;
@@ -252,8 +252,8 @@ div.growlUI h2 {
     background: -ms-linear-gradient(top, #5972a7 5%, #637aad 100%);
     background: linear-gradient(to bottom, #5972a7 5%, #637aad 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5972a7', endColorstr='#637aad', GradientType=0);
+    text-decoration: none;
 
-    background-color: #5972a7;
 }
 
 .myButton:active {
